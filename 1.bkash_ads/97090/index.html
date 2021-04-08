@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta name="ad.size" content="width=300,height=250">
+	<title> bKash animation by purplepatch </title>
+	<style>
+		*{margin: 0;padding: 0;user-select: none;}
+		.pp_wrapper {
+			width: 970px;
+			height: 90px;
+			background-image: url('assets/bg.jpg');
+			background-size: 100% 100%;
+			position: relative;
+			cursor: pointer;
+		}
+
+		.down-leave-active { animation: 1s down-leave; }
+
+		@keyframes down-leave {
+		  0% { clip-path: inset(0); }
+		  100% { clip-path: inset(0 0 0 100%); }
+		}
+
+		.slide{left: 0;top: 0;right: 0;bottom: 0;}
+		.slide_1 .creative_1{left: 10px;width: 67px;height: 31px;top: 5px;}
+		.slide_1 .creative_2{width: 289px;height: 88px;right: 33px;top: 3px;}
+		.slide_1 .creative_3{width: 146px;height: 52px;right: 107px;top: 4px;}
+		.slide_1 .creative_4{width: 651px;height: 71px;left: 0;right: 0;bottom: -1px;z-index: 99;}
+		.slide_1 .creative_5{width: 271px;height: 59px;left: 183px;right: 0;bottom: -10px;z-index: 99;}
+    	.slide_2 .creative_1{width: 235px;height: 97px;left: 105px;top: 4px;}
+		.slide_2 .creative_2{width: 146px;height: 79px;left: 402px;right: 0;bottom: 5px;}
+		.slide_2 .creative_3{width: 116px;height: 38px;right: 167px;bottom: 27px;}
+    	.slide_2 .creative_4{width: 46px;height: 15px;right: 4px;bottom: 2px;}
+    	.hidden{display: none;}
+		.absolute {position: absolute;}
+
+	</style>
+</head>
+<body>
+
+	<div class="pp_wrapper">
+		<div class="slide slide_1 absolute">
+			<div class="creative_1 absolute"><img src="assets/logo.png" alt=""></div>
+			<div class="creative_2 absolute"><img src="assets/model.png" alt=""></div>
+			<div class="creative_3 animation absolute"><img src="assets/line.png" alt=""></div>
+			<div class="tapCreative creative_4 absolute"><img src="assets/tap.png" alt=""></div>
+			<div class="tapCreative creative_5 absolute"><img src="assets/tap-text.png" alt=""></div>
+		</div>
+		<div class="slide slide_2 absolute hidden">
+			<div class="creative_1 absolute"><img src="assets/message.png" alt=""></div>
+			<div class="creative_2 absolute"><img src="assets/free.png" alt=""></div>
+			<div class="creative_3 absolute"><img src="assets/cta.png" alt=""></div>
+			<div class="creative_4 absolute"><img src="assets/condition.png" alt=""></div>
+		</div>
+	</div>
+
+	<script src="https://code.jquery.com/jquery-3.6.0.slim.min.js" crossorigin="anonymous"></script>
+	<script>
+
+		var timeoutId = 0;
+		$('.tapCreative').on('mousedown', function() {
+		    timeoutId = setTimeout(slideChange, 700)
+  		$('.animation').addClass('down-leave-active')
+
+		}).on('mouseup mouseleave', function() {
+		    clearTimeout(timeoutId);
+		});
+
+		function slideChange ( ) {
+			console.log('success');
+			$(".slide_1").addClass('hidden');
+			$(".slide_2").removeClass('hidden');
+		}
+
+	</script>
+	
+</body>
+</html>
