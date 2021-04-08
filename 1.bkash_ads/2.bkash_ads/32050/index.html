@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta name="ad.size" content="width=320,height=50">
+	<title> animation </title>
+	<style>
+		*{margin: 0;padding: 0;user-select: none;}
+		.pp_wrapper{width: 320px;height: 50px;position: relative;background-image: url('bg.jpg');background-size: 100% 100%;cursor: pointer;}
+		.slide {left: 0;top: 0;right: 0;bottom: 0;}
+		.slide_1 .asset_1 {width: 214px;height: 30px;left: 14px;top: 10px;}
+		.slide_1 .asset_2 {width: 21px;height: 27px;left: 263px;top: 12px;}
+		.slide_2 .asset_1 {width: 42px;height: 20px;left: 8px;top: 14px;}
+		.slide_2 .asset_2{width: 96px;height: 46px;right: 41px;top: 2px;}
+		.slide_2 .asset_3 {width: 104px;height: 30px;left: 67px;top: 12px;}
+		.slide_2 .asset_4 {width: 27px;height: 6px;right: 3px;bottom: 10px;}
+    
+		.slide_3 .asset_1 {width: 170px;height: 51px;right: 0px;bottom: 0px;}
+		.slide_3 .asset_2 {width: 42px;height: 20px;left: 8px;top: 14px;}
+		.slide_3 .asset_3 {width: 62px;height: 21px;left: 57px;top: 15px;}
+		.slide_3 .asset_4 {width: 50px;height: 49px;left: 126px;bottom: 0px;}
+		.slide_3 .asset_5 {width: 31px;height: 31px;right: 108px;bottom: 9px;}
+		.slide_3 .asset_6 {width: 31px;height: 31px;left: 215px;bottom: 9px;}
+		.slide_3 .asset_7 {width: 31px;height: 31px;left: 248px;bottom: 9px;}
+		.slide_3 .asset_8 {width: 31px;height: 31px;left: 283px;bottom: 9px;}
+
+		.absolute{position: absolute;}
+		.hidden{display: none;}
+	
+		.pulse { animation: pulse 2s ease-in-out infinite;}
+		@keyframes pulse {
+			0% {transform: scaleX(1)}
+			50% {transform: scale3d(.96, .96, .96)}
+			to {transform: scaleX(1)}
+		}
+
+		@keyframes hideZoomOut {100% {opacity: 0;transform: scale3d(.3, .3, .3)}}
+		@keyframes showZoomIn {
+			from {transform: scale3d(.5, .5, .5)}
+			to {transform: scale3d(1, 1, 1)}
+		}
+		.hideZoomOut {animation-name: hideZoomOut;animation-duration: .5s;animation-fill-mode: both; animation-iteration-count: 1}
+		.showZoomIn {animation-name: showZoomIn;animation-duration: .5s;animation-fill-mode: both}
+
+	</style>
+</head>
+<body>
+
+	<div class="pp_wrapper">
+		<div class="slide_1 slide absolute showZoomIn">
+			<div class="asset_1 absolute"><img src="tap-text.png
+				" alt=""></div>
+			<div class="asset_2 absolute tapCreative pulse"><img src="thumb.png
+				" alt=""></div>
+		</div>
+		<div class="slide_2 slide absolute hidden ">
+			<div class="asset_1 absolute"><img src="logo.png
+				" alt=""></div>
+			<div class="asset_2 absolute"><img src="charge-less.png
+				" alt=""></div>
+			<div class="asset_3 absolute"><img src="bill.png
+				" alt=""></div>
+			<div class="asset_4 absolute"><img src="condition.png
+				" alt=""></div>
+		</div>
+		<div class="slide_3 slide absolute hidden">
+			<div class="asset_1 absolute"><img src="red-bg.png
+				" alt=""></div>
+			<div class="asset_2 absolute"><img src="logo.png
+				" alt=""></div>
+			<div class="asset_3 absolute"><img src="text.png
+				" alt=""></div>
+			<div class="asset_4 absolute"><img src="paybill.png
+				" alt=""></div>
+			<div class="asset_5 absolute"><img src="electricity.png
+				" alt=""></div>
+			<div class="asset_6 absolute"><img src="gas.png
+				" alt=""></div>
+			<div class="asset_7 absolute"><img src="water.png
+				" alt=""></div>
+			<div class="asset_8 absolute"><img src="telephone.png
+				" alt=""></div>
+		</div>
+		
+	</div>
+
+	<script src="https://code.jquery.com/jquery-3.6.0.slim.min.js" crossorigin="anonymous"></script>
+	<script>
+		// document.oncontextmenu = document.body.oncontextmenu = function() {return false;}
+		var timeoutId = 0;
+		var secondSlide = 0;
+		$('.tapCreative').on('mousedown touchstart', function() {
+			$(this).removeClass('pulse');
+		    timeoutId = setTimeout(slideChange, 500);
+		}).on('mouseup mouseleave touchend', function() {
+		    clearTimeout(timeoutId);
+		});
+		function slideChange ( ) {
+			console.log('second slide start');
+			$(".pp_wrapper .slide_1").removeClass('showZoomIn').addClass('hideZoomOut');
+			setTimeout(function() {
+				$(".pp_wrapper .slide_2").removeClass('hidden').addClass('showZoomIn');
+				setTimeout(function() {
+					$(".pp_wrapper .slide_2").removeClass('showZoomIn').addClass('hideZoomOut');
+					setTimeout(function() {
+						$(".pp_wrapper .slide_3").removeClass('hidden').addClass('showZoomIn');
+
+						setTimeout(function() {
+							secondSlide += 1;
+						}, 500);
+
+					}, 300);
+				}, 2000);
+			}, 300);
+						
+		}
+		$(document).on('click','.pp_wrapper',function(){
+			if ( secondSlide ) {
+				window.open('{CLICK_MACRO}');
+			}
+		});
+	</script>
+	
+</body>
+</html>
