@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta name="ad.size" content="width=970,height=90">
+	<title> animation </title>
+	<style>
+		*{margin: 0;padding: 0;user-select: none;}
+		.pp_wrapper{width: 160px;height: 600px;position: relative;background-image: url('bg.jpg');background-size: 100% 100%;cursor: pointer;}
+		.slide {left: 0;top: 0;right: 0;bottom: 0;}
+		.slide_1 .asset_1 {width: 106px;height: 253px;left: 28px;top: 90.3px;}
+		.slide_1 .asset_2 {width: 44px;height: 55px;right: 57px;bottom: 104px;}
+
+		.slide_2 .asset_1 {width: 68px;height: 32px;left: 49px;top: 8px;}
+		.slide_2 .asset_2 {width: 147px;height: 137px;right: 6px;top: 69px;}
+		.slide_2 .asset_3 {width: 168px;height: 267px;right: 0px;bottom: -1px;}
+		.slide_2 .asset_4 {width: 122px;height: 121px;right: 18px;bottom: 204px;}
+		.slide_2 .asset_5 {width: 142px;height: 46px;left: 11px;bottom: 332px;}
+		.slide_2 .asset_6 {width: 66px;height: 66px;left: 10px;bottom: 122px;}
+		.slide_2 .asset_7 {width: 66px;height: 66px;right: 9px;bottom: 123px;}
+		.slide_2 .asset_8 {width: 66px;height: 66px;left: 10px;bottom: 47px;}
+		.slide_2 .asset_9 {width: 66px;height: 66px;right: 10px;bottom: 48px;}
+		.absolute{position: absolute;}
+		.hidden{display: none;}
+	
+		.pulse { animation: pulse 2s ease-in-out infinite;}
+		@keyframes pulse {
+			0% {transform: scaleX(1)}
+			50% {transform: scale3d(.96, .96, .96)}
+			to {transform: scaleX(1)}
+		}
+
+		@keyframes hideZoomOut {100% {opacity: 0;transform: scale3d(.3, .3, .3)}}
+		@keyframes showZoomIn {
+			from {transform: scale3d(.5, .5, .5)}
+			to {transform: scale3d(1, 1, 1)}
+		}
+		.hideZoomOut {animation-name: hideZoomOut;animation-duration: .5s;animation-fill-mode: both; animation-iteration-count: 1}
+		.showZoomIn {animation-name: showZoomIn;animation-duration: .5s;animation-fill-mode: both}
+
+	</style>
+</head>
+<body>
+
+	<div class="pp_wrapper">
+		<div class="slide_1 slide absolute showZoomIn ">
+			<div class="asset_1 absolute"><img src="tap-text.png
+				" alt=""></div>
+			<div class="asset_2 absolute tapCreative pulse"><img src="thumb.png
+				" alt=""></div>
+		</div>
+		<div class="slide_2 slide absolute hidden ">
+			<div class="asset_1 absolute"><img src="logo.png
+				" alt=""></div>
+			<div class="asset_2 absolute"><img src="charge-less.png
+				" alt=""></div>
+			<div class="asset_3 absolute"><img src="red-bg.png
+				" alt=""></div>			
+			<div class="asset_4 absolute"><img src="paybill.png
+				" alt=""></div>
+			<div class="asset_5 absolute"><img src="bill.png
+				" alt=""></div>
+			<div class="asset_6 absolute"><img src="electricity.png
+				" alt=""></div>
+			<div class="asset_7 absolute"><img src="gas.png
+				" alt=""></div>
+			<div class="asset_8 absolute"><img src="water.png
+				" alt=""></div>
+			<div class="asset_9 absolute"><img src="telephone.png
+				" alt=""></div>
+		</div>
+		
+	</div>
+
+	<script src="https://code.jquery.com/jquery-3.6.0.slim.min.js" crossorigin="anonymous"></script>
+	<script>
+		// document.oncontextmenu = document.body.oncontextmenu = function() {return false;}
+		var timeoutId = 0;
+		var secondSlide = 0;
+		$('.tapCreative').on('mousedown touchstart', function() {
+			$(this).removeClass('pulse');
+		    timeoutId = setTimeout(slideChange, 500);
+		}).on('mouseup mouseleave touchend', function() {
+		    clearTimeout(timeoutId);
+		});
+		function slideChange ( ) {
+			console.log('second slide start');
+			$(".pp_wrapper .slide_1").removeClass('showZoomIn').addClass('hideZoomOut');
+			setTimeout(function() {
+				$(".pp_wrapper .slide_2").removeClass('hidden').addClass('showZoomIn');
+				setTimeout(function() {
+					$(".pp_wrapper .slide_2").removeClass('hidden').addClass('showZoomIn');
+					
+				}, 2000);
+			}, 300);
+						
+		}
+		$(document).on('click','.pp_wrapper',function(){
+			if ( secondSlide ) {
+				window.open('{CLICK_MACRO}');
+			}
+		});
+	</script>
+	
+</body>
+</html>
